@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objects</title>
+</head>
+<body>
+    <script>
+        /*
+        const product = {
+            name : 'socks',
+            price : 1090
+        };
+        console.log(typeof product);
+        console.log(product.name); 
+        console.log(product.price);
+
+        product.name = 'cotton socks';
+        console.log(product);
+
+        product.newProperty = true;
+        console.log(product);
+
+        delete product.newProperty;
+
+        console.log(product);
+        */
+
+        /*
+
+        const product2 = {
+            name : 'shirt',
+            'delivery-time' : '1 day',
+            rating : {      //Nested object
+                stars : 4.5, 
+                count : 87
+            },
+            fun : function function1(){
+                console.log('function inside object');
+            }
+        };
+        console.log(product2);
+
+        console.log(product2.name);
+        console.log(product2['name'])   //This is called bracket notation, does the same thing as dot notation
+        console.log(product2['delivery-time']);
+
+        console.log(product2.rating.count);
+
+        product2.fun();
+
+        console.log(typeof console);    //console is an object provided by javascript
+        console.log(typeof console.log);    //conosle.log is a function, log is a function that is saved inside the console object
+
+        console.log(JSON.stringify(product2));  //JSON doesn't support functions
+
+        const jsonString = JSON.stringify(product2);
+        console.log(JSON.parse(jsonString));    //parse method converts the JSON object back into javascript object
+
+        */
+        
+        console.log('hello'.length);
+        console.log('hello'.toUpperCase()); 
+
+        const object1 = {
+            message : 'hello'
+        };
+
+        const object2 = object1;    //Makes a copy of the reference that points to the object, now two references pointing to the obj in memory
+
+        object1.message = 'Good job';
+        console.log(object1);
+        /* We were able to change message property even though we created object1 with const, that's becuase this variable just contains a reference to the object, const prevents us from changing the reference in the variable, but it doesn't prevent us from reaching into the reference and changing the object that it's pointing to */
+
+        console.log(object2);   //same output as prev because both point to the same object in the computers memory
+
+        const object3 = {
+            message : 'Good job'
+        };
+
+        console.log(object3 === object1);   //retuns false since this code compares the references, object 3 is a diff reference pointing to some other obj in memory
+
+        console.log(object1 === object2);   //returns true since both variables refer the same object in the memory
+
+
+        const object4 = {
+            message : 'Good job',
+            price : 799
+        };
+        // const message = object4.message;
+        const {message,price} = object4;  //This is shortcut for the above line, it is called destructuring
+        console.log(message);
+        console.log(price);
+
+        const object5 = {
+            //message : message
+            message,     //This code is same as the above line and is called the shorthand property, if the propery name and var name are same, we can do this
+        /*    method : function function1(){
+                console.log('method');
+            }
+        */    
+            method() {      //This code does the same thing as the code above, this shortcut is called shorthand method
+                console.log('method');
+            }
+        };
+        console.log(object5);
+        object5.method();
+    </script>
+</body>
+</html>
