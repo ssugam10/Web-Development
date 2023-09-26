@@ -1,28 +1,38 @@
 const todoList = JSON.parse(localStorage.getItem('array')) || [];
 
 renderTodoList();   //This function displays the list by generating html and inserting it in the div element
-
+ 
 function renderTodoList(){
     let todoListHTML = '';
-    for(let i = 0; i < todoList.length; i++)    //This technique is called generating the HTML
-    {
-        const todoObject = todoList[i]; //Each time this function is called the code inside the div is replaced by the updated version 
-        //const name = todoObject.name;
-        //const dueDate = todoObject.dueDate;
+
+    todoList.forEach((todoObject,index) => {
+        //Each time this function is called the code inside the div is replaced by the updated version 
+        
         const {name, dueDate} = todoObject;
         const html = `
                     <div>${name}</div> 
                     <div>${dueDate}</div> 
-                    <button onclick="
-                        todoList.splice(${i},1); 
-                        renderTodoList();           
-                        localStorage.setItem('array',JSON.stringify(todoList));     
-                    " class="delete-todo-button">Delete</button>
+                    <button class="delete-todo-button js-delete-todo-button">Delete</button>
                     `;
         todoListHTML += html;   
-    }
+    });
+    //This technique is called generating the HTML
     document.querySelector('.div-js').innerHTML = todoListHTML;
+
+    document.querySelectorAll('.js-delete-todo-button')      //queryselectorall provides a list of all the buttons with given class
+        .forEach((deleteButton,index) => {
+            deleteButton.addEventListener('click', () => {
+                todoList.splice(index,1); 
+                    renderTodoList();           
+                    localStorage.setItem('array',JSON.stringify(todoList));
+            })
+        });
 }
+
+document.querySelector('.js-add-todo-button')
+    .addEventListener('click', () => {
+        addElement();
+    });
 
 function addElement()
 {
@@ -43,4 +53,3 @@ function addElement()
 
     renderTodoList();
 }
-

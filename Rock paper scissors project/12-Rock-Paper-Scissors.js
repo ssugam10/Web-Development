@@ -8,6 +8,55 @@ let score = JSON.parse(localStorage.getItem('score')) || {
 
 updateScoreElement();
 
+
+let isAutoPlaying = false;
+let intervalID;
+
+function autoplay()
+{
+    if(!isAutoPlaying){
+        intervalID = setInterval(() => {
+            const playerMove =  pickComputerMove();
+            playGame(playerMove);
+        }, 1000);
+        isAutoPlaying = true;
+    }
+    else {
+        clearInterval(intervalID);  //to stop setinterval
+        isAutoPlaying = false;
+    }
+}
+
+document.querySelector('.js-rock-button')
+    .addEventListener('click',() => {
+        playGame('Rock');
+    });
+
+document.querySelector('.js-paper-button')
+    .addEventListener('click',() => {
+        playGame('Paper');
+    });
+
+document.querySelector('.js-scissors-button')
+    .addEventListener('click',() => {
+        playGame('Scissors');
+    });
+
+
+document.body.addEventListener('keydown',(event) => {
+    if(event.key === 'r'){
+        playGame('Rock');
+    }
+    else if(event.key === 'p'){
+        playGame('Paper');
+    }
+    else if(event.key === 's'){
+        playGame('Scissors');
+    }
+}); 
+//AddeventListener also provides the event object, but in the parameter of the function it has as a parameter
+
+
 function playGame(playerMove)
 {
     const computerMove = pickComputerMove();
@@ -110,3 +159,4 @@ function pickComputerMove()
     return computerMove;
 }
 //Using return statement ends the function immediately
+
